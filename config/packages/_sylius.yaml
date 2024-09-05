@@ -255,8 +255,10 @@ sylius_shop:
         include_all_descendants: true
 
 sylius_theme:
+    legacy_mode: true
     sources:
         filesystem:
-            scan_depth: 1
+            scan_depth: 1   
             directories:
+                - "%kernel.project_dir%/vendor/sylius/bootstrap-theme"
                 - "%kernel.project_dir%/themes"

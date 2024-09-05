@@ -1,0 +1,17 @@
+{
+    "name": "aboul/my-theme",
+    "type": "sylius-plugin",
+    "description": "Bootstrap child theme",
+    "authors": [
+        {
+            "name": "Abel BRIEN",
+            "email": "abel.brien@gmail.com"
+        }
+    ],
+    "extra": {
+        "sylius-theme": {
+            "title": "Aboul Theme",
+            "parents": [ "sylius/bootstrap-theme" ]
+        }
+    }
+}

@@ -1,5 +1,6 @@
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
+const WebpackBar = require('webpackbar');
 
 const syliusBundles = path.resolve(__dirname, 'vendor/sylius/sylius/src/Sylius/Bundle/');
 const uiBundleScripts = path.resolve(syliusBundles, 'UiBundle/Resources/private/js/');
@@ -14,6 +15,10 @@ Encore
   .cleanupOutputBeforeBuild()
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction())
+  .addPlugin(new WebpackBar({
+    name: "shop",
+    color: "blue"
+  }))
   .enableSassLoader();
 
 const shopConfig = Encore.getWebpackConfig();
@@ -34,6 +39,10 @@ Encore
   .cleanupOutputBeforeBuild()
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction())
+  .addPlugin(new WebpackBar({
+    name: "admin",
+    color: "green"
+  }))
   .enableSassLoader();
 
 const adminConfig = Encore.getWebpackConfig();
@@ -55,6 +64,10 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
+    .addPlugin(new WebpackBar({
+      name: "app.shop",
+      color: "grey"
+    }))
     .enableSassLoader();
 
 const appShopConfig = Encore.getWebpackConfig();
@@ -76,6 +89,10 @@ Encore
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
+    .addPlugin(new WebpackBar({
+      name: "app.admin",
+      color: "yellow"
+    }))
     .enableSassLoader();
 
 const appAdminConfig = Encore.getWebpackConfig();
@@ -97,10 +114,35 @@ Encore
   .disableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
   .enableSassLoader()
+  .addPlugin(new WebpackBar({
+    name: "app.bootstrapTheme",
+    color: "violet"
+  }))
+  .configureDevServerOptions((options) => {
+    options.client = {
+      overlay: {
+        warnings: false,
+      }
+    }
+    options.liveReload = true;
+    options.static = {
+        watch: false
+    };
+    options.watchFiles = {
+        paths: ['src/**/*.php', 'templates/**/*', 'themes/**/*'],
+    };
+  })
+  .configureWatchOptions((options) => {
+    console.log(options)
+    options.aggregateTimeout = 300;
+    options.poll = 250;
+  })
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction());
 
 const themeBootstrapConfig = Encore.getWebpackConfig();
 themeBootstrapConfig.name = 'app.bootstrapTheme';
+
+
 
 module.exports = [shopConfig, adminConfig, appShopConfig, appAdminConfig, themeBootstrapConfig];

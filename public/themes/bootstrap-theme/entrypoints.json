@@ -2,10 +2,10 @@
   "entrypoints": {
     "app": {
       "css": [
-        "/themes/bootstrap-theme/app.css"
+        "http://localhost:8080/themes/bootstrap-theme/app.css"
       ],
       "js": [
-        "/themes/bootstrap-theme/app.js"
+        "http://localhost:8080/themes/bootstrap-theme/app.js"
       ]
     }
   }

@@ -114,7 +114,29 @@ Encore
   .disableSingleRuntimeChunk()
   .cleanupOutputBeforeBuild()
   .enableSassLoader()
-
+  .addPlugin(new WebpackBar({
+    name: "app.bootstrapTheme",
+    color: "violet"
+  }))
+  .configureDevServerOptions((options) => {
+    options.client = {
+      overlay: {
+        warnings: false,
+      }
+    }
+    options.liveReload = true;
+    options.static = {
+        watch: false
+    };
+    options.watchFiles = {
+        paths: ['src/**/*.php', 'templates/**/*', 'themes/**/*'],
+    };
+  })
+  .configureWatchOptions((options) => {
+    console.log(options)
+    options.aggregateTimeout = 300;
+    options.poll = 250;
+  })
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction());
 

@@ -3,6 +3,10 @@
 /public/css
 /public/js
 /public/media
+/public/themes
+/themes
+public/themes/bootstrap-theme/entrypoints.json
+public/themes/bootstrap-theme/manifest.json
 !/public/media/image/.gitkeep
 
 /etc/build/*
@@ -53,5 +57,3 @@
 /package-lock.json
 ###< symfony/webpack-encore-bundle ###
 .vscode/settings.json
-/public/themes/
-/themes/

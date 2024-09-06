@@ -1,11 +1,3 @@
-[![npm][npm]][npm-url]
-[![node][node]][node-url]
-[![tests][tests]][tests-url]
-[![coverage][cover]][cover-url]
-[![discussion][discussion]][discussion-url]
-[![downloads][downloads]][npm-url]
-[![contributors][contributors]][contributors-url]
-
 ## About
 
 A template/example of Sylius running through Docker (based on Sylius/Standard project) with bootstrap child theme ready to use.

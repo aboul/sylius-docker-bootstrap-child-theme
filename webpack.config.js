@@ -133,7 +133,6 @@ Encore
     };
   })
   .configureWatchOptions((options) => {
-    console.log(options)
     options.aggregateTimeout = 300;
     options.poll = 250;
   })

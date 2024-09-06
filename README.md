@@ -1,26 +1,15 @@
-<p align="center">
-    <a href="https://sylius.com" target="_blank">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="https://media.sylius.com/sylius-logo-800-dark.png">
-          <source media="(prefers-color-scheme: light)" srcset="https://media.sylius.com/sylius-logo-800.png">
-          <img alt="Sylius Logo." src="https://media.sylius.com/sylius-logo-800.png">
-        </picture>
-    </a>
-</p>
-
-<h1 align="center">Sylius Standard Edition</h1>
-
-<p align="center">This is Sylius Standard Edition repository for starting new projects.</p>
+[![npm][npm]][npm-url]
+[![node][node]][node-url]
+[![tests][tests]][tests-url]
+[![coverage][cover]][cover-url]
+[![discussion][discussion]][discussion-url]
+[![downloads][downloads]][npm-url]
+[![contributors][contributors]][contributors-url]
 
 ## About
 
-Sylius is the first decoupled eCommerce framework based on [**Symfony**](http://symfony.com) and [**Doctrine**](http://doctrine-project.org). 
-The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for application tailored to your business requirements. 
-Enjoy being an eCommerce Developer again!
-
-Powerful REST API allows for easy integrations and creating unique customer experience on any device.
-
-We're using full-stack Behavior-Driven-Development, with [phpspec](http://phpspec.net) and [Behat](http://behat.org)
+A template/example of Sylius running through Docker (based on Sylius/Standard project) with bootstrap child theme ready to use.
+It also provides webpack-dev-server configuration (HMR ready, live reload for css/js/twig/PHP).
 
 ## Documentation
 
@@ -28,59 +17,74 @@ Documentation is available at [docs.sylius.com](http://docs.sylius.com).
 
 ## Installation
 
-### Traditional
-```bash
-$ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project sylius/sylius-standard project
-$ cd project
-$ yarn install
-$ yarn build
-$ php bin/console sylius:install
-$ symfony serve
-$ open http://localhost:8000/
+Follow installation docs from [Sylius/Sylius-Standard](https://github.com/Sylius/Sylius-Standard/).
+
+## Usage
+
+By default, `compose.override.yml` launch `yarn dev-server` on node container. Based on webpack.config.js file, this will run a dev-server at `localhost:8080` to deliver your asset.
+
+### Disable dev-server and fallback to normal assets delivering by symfony
+
+```yaml
+# compose.override.yml
+services: 
+  ...
+  nodejs:
+    image: node:${NODE_VERSION:-18}-alpine
+    user: ${DOCKER_USER:-1000:1000}
+    working_dir: /srv/sylius
+    entrypoint: [ "/bin/sh","-c" ]
+    command:
+        #- "yarn dev-server"
+        - "yarn watch"
+    volumes:
+        - .:/srv/sylius:rw,cached
+        - ./public:/srv/sylius/public:rw,delegated
+    ports: 
+        - "8080:8080"
 ```
 
-For more detailed instruction please visit [installation chapter in our docs](https://docs.sylius.com/en/latest/book/installation/installation.html).
+or 
 
-### Docker
-
-#### Development
-
-Make sure you have installed [Docker](https://docs.docker.com/get-docker/) on your local machine.
-Execute `make init` in your favorite terminal and wait some time until the services will be ready.
-Then enter `localhost` in your browser or execute `open localhost` in your terminal.
-
-
-## Troubleshooting
-
-If something goes wrong, errors & exceptions are logged at the application level:
-
-```bash
-$ tail -f var/log/prod.log
-$ tail -f var/log/dev.log
+```yaml
+# compose.override.yml
+services: 
+  ...
+  nodejs:
+    image: node:${NODE_VERSION:-18}-alpine
+    user: ${DOCKER_USER:-1000:1000}
+    working_dir: /srv/sylius
+    entrypoint: [ "/bin/sh","-c" ]
+    command:
+        #- "yarn dev-server"
+        #- "yarn watch"
+        - ""
+    volumes:
+        - .:/srv/sylius:rw,cached
+        - ./public:/srv/sylius/public:rw,delegated
+    ports: 
+        - "8080:8080"
 ```
 
-## Contributing
+In the first example, `compose.override.yml` run ```yarn watch``` so you can start customize your theme.
+In the second example, you have to run ```yarn watch``` (or others commands) manually in the docker node container to start development.
 
-Would like to help us and build the most developer-friendly eCommerce framework? Start from reading our [Contribution Guide](https://docs.sylius.com/en/latest/contributing/)!
+## Key files
 
-## Stay Updated
+- `package.json` for dev-server command config and see others yarn commands (native sylius)
+- `webpack.config.js` for other dev-server config and customize other theme webpack configs (addEntry for example)
+- `compose.override.yml` to change dev strategy
 
-If you want to keep up with the updates, [follow the official Sylius account on Twitter](http://twitter.com/Sylius) and [like us on Facebook](https://www.facebook.com/SyliusEcommerce/).
+## Documentation
 
-## Bug Tracking
+[Read the Documentation on docs.sylius.com](http://docs.sylius.com).  
+[Read the Documentation on symfony.com](https://symfony.com/doc/current/frontend.html).  
+[Read the Documentation of webpack-dev-server](https://github.com/webpack/webpack-dev-server).  
 
-If you want to report a bug or suggest an idea, please use [GitHub issues](https://github.com/Sylius/Sylius/issues).
+## Attribution
 
-## Community Support
-
-Get Sylius support on [Slack](https://sylius.com/slack), [Forum](https://forum.sylius.com/) or [Stack Overflow](https://stackoverflow.com/questions/tagged/sylius).
-
-## MIT License
-
-Sylius is completely free and released under the [MIT License](https://github.com/Sylius/Sylius/blob/master/LICENSE).
+This project is based on [Sylius/Sylius-Standard v1.13](https://github.com/Sylius/Sylius-Standard).
 
 ## Authors
 
-Sylius was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
-See the list of [contributors from our awesome community](https://github.com/Sylius/Sylius/contributors).
+[Abel BRIEN](https://github.com/aboul).

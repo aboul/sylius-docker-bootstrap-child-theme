@@ -2,7 +2,7 @@
 
 ## About
 
-A template/example of Sylius running through Docker (based on Sylius/Standard project) with bootstrap child theme ready to use.
+A template/example of Sylius running through Docker (based on Sylius/Standard project) with bootstrap child theme ready to use, based on official [Sylius documentation](https://docs.sylius.com/en/1.13/book/themes/bootstrap-theme.html#creating-a-new-theme-based-on-bootstraptheme).
 It also provides webpack-dev-server configuration (HMR ready, live reload for css/js/twig/PHP).
 
 ## Documentation

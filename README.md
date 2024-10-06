@@ -1,9 +1,11 @@
+# Sylius with a ready to use bootstrap child theme and HMR
+
 ## About
 
 A template/example of Sylius running through Docker (based on Sylius/Standard project) with bootstrap child theme ready to use.
 It also provides webpack-dev-server configuration (HMR ready, live reload for css/js/twig/PHP).
 
-## Documentation
+## Sylius Documentation
 
 Documentation is available at [docs.sylius.com](http://docs.sylius.com).
 
@@ -13,7 +15,10 @@ Follow installation docs from [Sylius/Sylius-Standard](https://github.com/Sylius
 
 ## Usage
 
-By default, `compose.override.yml` launch `yarn dev-server` on node container. Based on webpack.config.js file, this will run a dev-server at `localhost:8080` to deliver your asset.
+By default, `compose.override.yml` launch `yarn dev-server`  on node container. Based on webpack.config.js file, this will run a dev-server at `localhost:8080` to deliver your asset. You don't need to refresh pages when you develop, your changes in twig, js, scss and php files will refresh the page for you.
+You can follow compilation with this command line: `docker logs --tail 1000 -f <nodejs-container-name>`.
+
+If dev-server crashes or bugs, restart it with `docker restart <nodejs-container-name>`.
 
 ### Disable dev-server and fallback to normal assets delivering by symfony
 
@@ -36,7 +41,7 @@ services:
         - "8080:8080"
 ```
 
-or 
+or
 
 ```yaml
 # compose.override.yml

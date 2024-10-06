@@ -2,13 +2,13 @@
 
 @import '../../../../vendor/sylius/bootstrap-theme/assets/scss/vendors/main.scss';
 
-@import '../../../../vendor/sylius/bootstrap-theme/assets/scss//base/main.scss';
+@import '../../../../vendor/sylius/bootstrap-theme/assets/scss/base/main.scss';
 
-@import '../../../../vendor/sylius/bootstrap-theme/assets/scss//components/main.scss';
+@import '../../../../vendor/sylius/bootstrap-theme/assets/scss/components/main.scss';
 
-@import '../../../../vendor/sylius/bootstrap-theme/assets/scss//layout/main.scss';
+@import '../../../../vendor/sylius/bootstrap-theme/assets/scss/layout/main.scss';
 
-@import '../../../../vendor/sylius/bootstrap-theme/assets/scss//pages/main.scss';
+@import '../../../../vendor/sylius/bootstrap-theme/assets/scss/pages/main.scss';
 
 @include media-breakpoint-up(lg) {
     .nav-item.dropdown:hover .dropdown-menu {

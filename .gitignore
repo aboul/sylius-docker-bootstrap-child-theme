@@ -4,7 +4,6 @@
 /public/js
 /public/media
 /public/themes
-/themes
 public/themes/bootstrap-theme/entrypoints.json
 public/themes/bootstrap-theme/manifest.json
 !/public/media/image/.gitkeep
@@ -57,3 +56,4 @@ public/themes/bootstrap-theme/manifest.json
 /package-lock.json
 ###< symfony/webpack-encore-bundle ###
 .vscode/settings.json
+.history

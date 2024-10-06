@@ -2,6 +2,7 @@
     "name": "aboul/my-theme",
     "type": "sylius-plugin",
     "description": "Bootstrap child theme",
+    "licence": "MIT",
     "authors": [
         {
             "name": "Abel BRIEN",

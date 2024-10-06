@@ -1,4 +1,6 @@
+/* eslint-disable no-param-reassign */
 const path = require('path');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const Encore = require('@symfony/webpack-encore');
 const WebpackBar = require('webpackbar');
 
@@ -16,8 +18,8 @@ Encore
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction())
   .addPlugin(new WebpackBar({
-    name: "shop",
-    color: "blue"
+    name: 'shop',
+    color: 'blue',
   }))
   .enableSassLoader();
 
@@ -40,8 +42,8 @@ Encore
   .enableSourceMaps(!Encore.isProduction())
   .enableVersioning(Encore.isProduction())
   .addPlugin(new WebpackBar({
-    name: "admin",
-    color: "green"
+    name: 'admin',
+    color: 'green',
   }))
   .enableSassLoader();
 
@@ -50,61 +52,60 @@ const adminConfig = Encore.getWebpackConfig();
 adminConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
 adminConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
 adminConfig.resolve.alias['sylius/bundle'] = syliusBundles;
-adminConfig.externals = Object.assign({}, adminConfig.externals, { window: 'window', document: 'document' });
+adminConfig.externals = { ...adminConfig.externals, window: 'window', document: 'document' };
 adminConfig.name = 'admin';
 
 Encore.reset();
 
 // App shop config
 Encore
-    .setOutputPath('public/build/app/shop')
-    .setPublicPath('/build/app/shop')
-    .addEntry('app-shop-entry', './assets/shop/entry.js')
-    .disableSingleRuntimeChunk()
-    .cleanupOutputBeforeBuild()
-    .enableSourceMaps(!Encore.isProduction())
-    .enableVersioning(Encore.isProduction())
-    .addPlugin(new WebpackBar({
-      name: "app.shop",
-      color: "grey"
-    }))
-    .enableSassLoader();
+  .setOutputPath('public/build/app/shop')
+  .setPublicPath('/build/app/shop')
+  .addEntry('app-shop-entry', './assets/shop/entry.js')
+  .disableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
+  .addPlugin(new WebpackBar({
+    name: 'app.shop',
+    color: 'grey',
+  }))
+  .enableSassLoader();
 
 const appShopConfig = Encore.getWebpackConfig();
 
 appShopConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
 appShopConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
 appShopConfig.resolve.alias['sylius/bundle'] = syliusBundles;
-appShopConfig.externals = Object.assign({}, appShopConfig.externals, { window: 'window', document: 'document' });
+appShopConfig.externals = { ...appShopConfig.externals, window: 'window', document: 'document' };
 appShopConfig.name = 'app.shop';
 
 Encore.reset();
 
 // App admin config
 Encore
-    .setOutputPath('public/build/app/admin')
-    .setPublicPath('/build/app/admin')
-    .addEntry('app-admin-entry', './assets/admin/entry.js')
-    .disableSingleRuntimeChunk()
-    .cleanupOutputBeforeBuild()
-    .enableSourceMaps(!Encore.isProduction())
-    .enableVersioning(Encore.isProduction())
-    .addPlugin(new WebpackBar({
-      name: "app.admin",
-      color: "yellow"
-    }))
-    .enableSassLoader();
+  .setOutputPath('public/build/app/admin')
+  .setPublicPath('/build/app/admin')
+  .addEntry('app-admin-entry', './assets/admin/entry.js')
+  .disableSingleRuntimeChunk()
+  .cleanupOutputBeforeBuild()
+  .enableSourceMaps(!Encore.isProduction())
+  .enableVersioning(Encore.isProduction())
+  .addPlugin(new WebpackBar({
+    name: 'app.admin',
+    color: 'yellow',
+  }))
+  .enableSassLoader();
 
 const appAdminConfig = Encore.getWebpackConfig();
 
 appAdminConfig.resolve.alias['sylius/ui'] = uiBundleScripts;
 appAdminConfig.resolve.alias['sylius/ui-resources'] = uiBundleResources;
 appAdminConfig.resolve.alias['sylius/bundle'] = syliusBundles;
-appAdminConfig.externals = Object.assign({}, appAdminConfig.externals, { window: 'window', document: 'document' });
+appAdminConfig.externals = { ...appAdminConfig.externals, window: 'window', document: 'document' };
 appAdminConfig.name = 'app.admin';
 
 Encore.reset();
-
 
 // App theme config
 Encore
@@ -115,21 +116,21 @@ Encore
   .cleanupOutputBeforeBuild()
   .enableSassLoader()
   .addPlugin(new WebpackBar({
-    name: "app.bootstrapTheme",
-    color: "violet"
+    name: 'app.bootstrapTheme',
+    color: 'violet',
   }))
   .configureDevServerOptions((options) => {
     options.client = {
       overlay: {
         warnings: false,
-      }
-    }
+      },
+    };
     options.liveReload = true;
     options.static = {
-        watch: false
+      watch: false,
     };
     options.watchFiles = {
-        paths: ['src/**/*.php', 'templates/**/*', 'themes/**/*'],
+      paths: ['src/**/*.php', 'templates/**/*', 'themes/**/*'],
     };
   })
   .configureWatchOptions((options) => {
@@ -141,7 +142,5 @@ Encore
 
 const themeBootstrapConfig = Encore.getWebpackConfig();
 themeBootstrapConfig.name = 'app.bootstrapTheme';
-
-
 
 module.exports = [shopConfig, adminConfig, appShopConfig, appAdminConfig, themeBootstrapConfig];
